@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rencontre Célibataires — Trouvez l'Amour</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --burgundy: #7b1c3e;
+      --burgundy-dark: #4e0f26;
+      --rose: #c2415e;
+      --gold: #c9923a;
+      --gold-light: #e8c98a;
+      --cream: #fdf8f2;
+      --text: #2a1018;
+      --muted: #8a6070;
+      --border: #e8d5dc;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text); }
+
+    /* NAVBAR */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 4rem; height: 72px; background: rgba(78,15,38,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,168,76,0.2); }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: white; text-decoration: none; }
+    .nav-brand em { color: var(--gold-light); font-style: italic; }
+    .nav-menu { display: flex; align-items: center; gap: 2.5rem; }
+    .nav-menu a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-menu a:hover { color: var(--gold-light); }
+    .nav-cta { background: var(--gold) !important; color: white !important; padding: 0.55rem 1.4rem; border-radius: 4px; font-weight: 600 !important; }
+
+    /* HERO */
+    .hero { min-height: 100vh; background: linear-gradient(to bottom, rgba(78,15,38,0.88) 0%, rgba(78,15,38,0.6) 60%, rgba(78,15,38,0.88) 100%), url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1600&q=80') center/cover no-repeat; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 8rem 2rem 5rem; position: relative; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold-light); padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.8rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2rem; animation: fadeUp 0.7s ease both; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700; color: white; line-height: 1.08; margin-bottom: 1.5rem; animation: fadeUp 0.7s 0.1s ease both; }
+    .hero h1 em { color: var(--gold-light); font-style: italic; display: block; }
+    .hero-sub { font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.65); font-weight: 300; max-width: 520px; line-height: 1.7; margin-bottom: 3rem; animation: fadeUp 0.7s 0.2s ease both; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: fadeUp 0.7s 0.3s ease both; }
+    .btn-primary { background: var(--gold); color: white; border: none; padding: 1rem 2.2rem; border-radius: 4px; font-family: 'Jost', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.2s; box-shadow: 0 6px 25px rgba(201,146,58,0.4); }
+    .btn-primary:hover { background: #b07d2a; transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.4); padding: 1rem 2.2rem; border-radius: 4px; font-family: 'Jost', sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+    .hero-stats { position: absolute; bottom: 3rem; display: flex; gap: 4rem; animation: fadeUp 0.7s 0.4s ease both; }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold-light); }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* SECTIONS */
+    .section { padding: 6rem 2rem; }
+    .container { max-width: 1080px; margin: 0 auto; }
+    .section-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--rose); margin-bottom: 0.75rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text); line-height: 1.15; margin-bottom: 1rem; }
+    .section-title em { color: var(--rose); font-style: italic; }
+    .section-desc { color: var(--muted); font-size: 1rem; line-height: 1.8; max-width: 500px; font-weight: 300; }
+    .gold-line { width: 50px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 2px; margin: 1.2rem 0 1.8rem; }
+
+    /* HOW IT WORKS */
+    .how-bg { background: white; }
+    .how-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .how-card { padding: 2.5rem 2rem; border: 1px solid var(--border); border-radius: 12px; background: var(--cream); position: relative; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
+    .how-card:hover { border-color: var(--gold); box-shadow: 0 8px 30px rgba(201,146,58,0.12); transform: translateY(-4px); }
+    .how-number { position: absolute; top: -16px; left: 2rem; background: var(--burgundy); color: var(--gold-light); font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .how-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .how-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .how-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    /* PROFILES */
+    .profiles-bg { background: var(--cream); }
+    .profiles-header { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+    .profiles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+
+    /* LOADING */
+    .loading-profiles { text-align: center; padding: 3rem; color: var(--muted); }
+    .spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--rose); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .no-profiles { text-align: center; padding: 3rem; color: var(--muted); font-size: 1rem; }
+
+    .profile-card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; }
+    .profile-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(123,28,62,0.12); border-color: var(--rose); }
+    .profile-top { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 5rem; background: linear-gradient(135deg, #fdf0f3, #fce4ec); position: relative; overflow: hidden; }
+    .profile-top img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-online { position: absolute; top: 14px; right: 14px; background: #2ecc71; width: 11px; height: 11px; border-radius: 50%; border: 2px solid white; }
+    .profile-body { padding: 1.4rem; }
+    .profile-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
+    .verified { color: var(--gold); font-size: 0.9rem; }
+    .profile-meta { font-size: 0.8rem; color: var(--muted); margin: 0.3rem 0 0.8rem; }
+    .profile-bio { font-size: 0.87rem; color: #555; line-height: 1.6; margin-bottom: 1rem; }
+    .profile-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .chip { font-size: 0.72rem; padding: 0.2rem 0.7rem; border-radius: 50px; background: #fdf0f3; color: var(--rose); font-weight: 500; border: 1px solid #f8d7df; }
+    .profile-contact-btn { width: 100%; padding: 0.7rem; background: var(--burgundy); color: white; border: none; border-radius: 6px; font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+    .profile-contact-btn:hover { background: var(--rose); }
+
+    /* PHOTO UPLOAD */
+    .field-label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--text); letter-spacing: 0.3px; margin-bottom: 0.45rem; text-transform: uppercase; }
+    .photo-upload-area { display: block; border: 2px dashed var(--border); border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: #fafafa; }
+    .photo-upload-area:hover { border-color: var(--burgundy); background: #fff5f7; }
+    .photo-preview-wrap { display: flex; align-items: center; gap: 1rem; }
+    .photo-preview-img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid var(--border); display: none; flex-shrink: 0; }
+    .photo-placeholder { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #fdf0f3, #fce4ec); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; border: 3px solid var(--border); }
+    .photo-text { text-align: left; flex: 1; }
+    .photo-text strong { display: block; font-size: 0.88rem; color: var(--text); margin-bottom: 0.2rem; }
+    .photo-text span { font-size: 0.78rem; color: var(--muted); }
+    .photo-hint { font-size: 0.75rem; color: var(--rose); margin-top: 0.4rem; display: none; }
+
+    /* MODAL CONTACT */
+    .modal-overlay { position: fixed; inset: 0; z-index: 500; background: rgba(30,5,15,0.75); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+    .modal-overlay.active { opacity: 1; pointer-events: all; }
+    .modal { background: white; border-radius: 20px; padding: 2.5rem; max-width: 380px; width: 100%; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.3); transform: scale(0.92); transition: transform 0.25s; }
+    .modal-overlay.active .modal { transform: scale(1); }
+    .modal-avatar-wrap { width: 90px; height: 90px; border-radius: 50%; overflow: hidden; margin: 0 auto 0.8rem; border: 3px solid var(--border); background: linear-gradient(135deg, #fdf0f3, #fce4ec); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .modal-avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .modal-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: var(--text); }
+    .modal-info { font-size: 0.85rem; color: var(--muted); margin: 0.3rem 0 0.5rem; }
+    .modal-phone { display: inline-block; background: #fdf0f3; color: var(--burgundy); font-size: 1rem; font-weight: 600; padding: 0.5rem 1.2rem; border-radius: 8px; margin: 0.8rem 0 1.5rem; letter-spacing: 0.5px; border: 1px solid #f8d7df; }
+    .modal-actions { display: flex; flex-direction: column; gap: 0.75rem; }
+    .modal-btn { display: flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 0.85rem; border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; border: none; text-decoration: none; transition: transform 0.15s; }
+    .modal-btn:hover { transform: translateY(-2px); }
+    .btn-call { background: var(--burgundy); color: white; }
+    .btn-whatsapp { background: #25d366; color: white; }
+    .btn-sms { background: #f0f0f5; color: var(--text); }
+    .modal-close { margin-top: 1.2rem; background: none; border: none; color: var(--muted); font-size: 0.85rem; cursor: pointer; font-family: 'Jost', sans-serif; }
+    .modal-close:hover { color: var(--rose); }
+
+    /* FORM */
+    .form-section { background: linear-gradient(135deg, var(--burgundy-dark) 0%, var(--burgundy) 100%); padding: 6rem 2rem; }
+    .form-section .section-eyebrow { color: var(--gold-light); }
+    .form-section .section-title { color: white; }
+    .form-section .section-desc { color: rgba(255,255,255,0.5); }
+    .form-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+    .form-info-list { list-style: none; margin-top: 2rem; }
+    .form-info-list li { display: flex; align-items: flex-start; gap: 1rem; color: rgba(255,255,255,0.7); font-size: 0.92rem; line-height: 1.6; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .form-info-list li:last-child { border-bottom: none; }
+    .form-card { background: white; border-radius: 16px; padding: 2.8rem; box-shadow: 0 30px 80px rgba(0,0,0,0.35); }
+    .form-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+    .form-card > p { font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem; }
+    .form-row { margin-bottom: 1.3rem; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--text); letter-spacing: 0.3px; margin-bottom: 0.45rem; text-transform: uppercase; }
+    input[type="text"], input[type="number"], input[type="email"], input[type="tel"], select, textarea { width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Jost', sans-serif; font-size: 0.92rem; color: var(--text); background: #fafafa; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus, textarea:focus { border-color: var(--burgundy); background: white; }
+    textarea { resize: vertical; min-height: 90px; }
+    .form-submit { width: 100%; padding: 1rem; background: var(--burgundy); color: white; border: none; border-radius: 8px; font-family: 'Jost', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; margin-top: 0.5rem; transition: background 0.2s, transform 0.2s; box-shadow: 0 4px 20px rgba(123,28,62,0.3); }
+    .form-submit:hover { background: var(--rose); transform: translateY(-2px); }
+    .form-submit:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+    .form-terms { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 1rem; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; color: white; padding: 1rem 1.6rem; border-radius: 10px; font-size: 0.92rem; font-weight: 500; box-shadow: 0 8px 30px rgba(0,0,0,0.2); display: none; animation: toastIn 0.4s ease; }
+    .toast.success { background: #1e6641; }
+    .toast.error { background: #c0392b; }
+    @keyframes toastIn { from { transform: translateX(110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+    /* FOOTER */
+    footer { background: var(--burgundy-dark); padding: 3.5rem 2rem 2.5rem; text-align: center; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: white; margin-bottom: 0.5rem; }
+    .footer-brand em { color: var(--gold-light); font-style: italic; }
+    .footer-tagline { color: rgba(255,255,255,0.4); font-size: 0.85rem; margin-bottom: 2rem; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .footer-links a { color: rgba(255,255,255,0.4); font-size: 0.82rem; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); max-width: 400px; margin: 0 auto 1.5rem; }
+    .footer-copy { color: rgba(255,255,255,0.3); font-size: 0.82rem; margin-bottom: 0.6rem; }
+    .footer-credit { font-size: 0.82rem; color: rgba(255,255,255,0.25); }
+    .footer-credit strong { color: var(--gold-light); font-weight: 700; letter-spacing: 2px; font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-menu { display: none; }
+      .hero-stats { gap: 2rem; }
+      .form-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-brand" href="#">Rencontre <em>Célibataires</em></a>
+  <div class="nav-menu">
+    <a href="#comment">Comment ça marche</a>
+    <a href="#profils">Profils</a>
+    <a href="#inscription" class="nav-cta">S'inscrire gratuitement</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">✦ Plateforme de rencontres sérieuses</div>
+  <h1>Trouvez votre<br/><em>âme sœur</em></h1>
+  <p class="hero-sub">Des milliers de célibataires sincères vous attendent. Créez votre profil et commencez votre belle histoire d'amour aujourd'hui.</p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="document.getElementById('inscription').scrollIntoView({behavior:'smooth'})">Créer mon profil</button>
+    <button class="btn-outline" onclick="document.getElementById('profils').scrollIntoView({behavior:'smooth'})">Voir les profils</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num" id="statCount">0</div><div class="stat-label">Membres inscrits</div></div>
+    <div class="stat"><div class="stat-num">3 200+</div><div class="stat-label">Couples formés</div></div>
+    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Satisfaction</div></div>
+  </div>
+</section>
+
+<!-- COMMENT CA MARCHE -->
+<section class="section how-bg" id="comment">
+  <div class="container">
+    <div class="section-eyebrow">Fonctionnement</div>
+    <h2 class="section-title">Trouvez <em>l'amour</em> en 4 étapes simples</h2>
+    <div class="gold-line"></div>
+    <div class="how-grid">
+      <div class="how-card"><div class="how-number">1</div><div class="how-icon">📝</div><h3>Créez votre profil</h3><p>Inscrivez-vous avec vos informations, votre photo et vos centres d'intérêt.</p></div>
+      <div class="how-card"><div class="how-number">2</div><div class="how-icon">🔍</div><h3>Explorez les profils</h3><p>Parcourez les profils avec photos des célibataires partout dans le monde.</p></div>
+      <div class="how-card"><div class="how-number">3</div><div class="how-icon">📞</div><h3>Prenez contact</h3><p>Appelez ou envoyez un message WhatsApp directement depuis le profil.</p></div>
+      <div class="how-card"><div class="how-number">4</div><div class="how-icon">❤️</div><h3>Vivez votre histoire</h3><p>Organisez une rencontre et laissez l'amour faire le reste.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILS -->
+<section class="section profiles-bg" id="profils">
+  <div class="container">
+    <div class="profiles-header">
+      <div>
+        <div class="section-eyebrow">Nos membres</div>
+        <h2 class="section-title">Profils <em>récents</em></h2>
+        <div class="gold-line"></div>
+      </div>
+      <p class="section-desc" style="max-width:280px;font-size:0.88rem;">Des célibataires sincères à la recherche d'une relation sérieuse et durable.</p>
+    </div>
+    <div id="profilesGrid">
+      <div class="loading-profiles">
+        <div class="spinner"></div>
+        <p>Chargement des profils...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSCRIPTION -->
+<section class="form-section" id="inscription">
+  <div class="container">
+    <div class="section-eyebrow">Inscription gratuite</div>
+    <h2 class="section-title" style="color:white;">Rejoignez notre <em style="color:var(--gold-light)">communauté</em></h2>
+    <div class="gold-line"></div>
+    <div class="form-wrapper">
+      <div>
+        <p class="section-desc">Complétez votre profil avec une belle photo et commencez à rencontrer des célibataires sincères dès aujourd'hui.</p>
+        <ul class="form-info-list">
+          <li><span>📸</span> Ajoutez votre photo pour plus de visibilité</li>
+          <li><span>✅</span> Inscription 100% gratuite et rapide</li>
+          <li><span>🔒</span> Vos données sont sécurisées et confidentielles</li>
+          <li><span>💾</span> Votre profil est sauvegardé automatiquement</li>
+          <li><span>📞</span> Contact direct par appel ou WhatsApp</li>
+        </ul>
+      </div>
+      <div class="form-card">
+        <h3>Créer mon profil</h3>
+        <p>Tous les champs marqués * sont obligatoires</p>
+
+        <!-- PHOTO -->
+        <div class="form-row">
+          <span class="field-label">Photo de profil *</span>
+          <label for="photoInput" class="photo-upload-area">
+            <input type="file" id="photoInput" accept="image/*" onchange="previewPhoto(event)" style="display:none"/>
+            <div class="photo-preview-wrap">
+              <div class="photo-placeholder" id="photoPlaceholder">📷</div>
+              <img id="photoPreview" class="photo-preview-img" src="" alt="Aperçu"/>
+              <div class="photo-text">
+                <strong id="photoTitle">Appuyez ici pour choisir une photo</strong>
+                <span>Depuis votre galerie — JPG, PNG, WEBP</span>
+                <div class="photo-hint" id="photoHint">✅ Photo sélectionnée !</div>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div class="two-col">
+          <div class="form-row"><label>Prénom *</label><input type="text" id="prenom" placeholder="Votre prénom"/></div>
+          <div class="form-row"><label>Âge *</label><input type="number" id="age" placeholder="Ex: 28" min="18" max="99"/></div>
+        </div>
+        <div class="two-col">
+          <div class="form-row"><label>Genre *</label><select id="genre"><option value="">Choisir...</option><option>Homme</option><option>Femme</option><option>Autre</option></select></div>
+          <div class="form-row"><label>Ville *</label><input type="text" id="ville" placeholder="Ex: Dakar"/></div>
+        </div>
+        <div class="form-row"><label>Adresse email *</label><input type="email" id="email" placeholder="Ex: exemple@gmail.com"/></div>
+        <div class="form-row"><label>Numéro de téléphone *</label><input type="tel" id="telephone" placeholder="Ex: +221 77 000 00 00"/></div>
+        <div class="form-row"><label>Centres d'intérêt</label><input type="text" id="interets" placeholder="Ex: Voyages, Musique, Sport..."/></div>
+        <div class="form-row"><label>Parlez de vous</label><textarea id="description" placeholder="Décrivez-vous en quelques mots..."></textarea></div>
+        <button class="form-submit" id="submitBtn" onclick="inscrire()">Créer mon profil gratuitement</button>
+        <p class="form-terms">En vous inscrivant, vous acceptez nos conditions d'utilisation et notre politique de confidentialité.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Idée <em>HGS Le Patriote</em></div>
+  <p class="footer-tagline">Votre histoire d'amour commence ici ❤️</p>
+  <div class="footer-links">
+    <a href="#">Accueil</a>
+    <a href="#comment">Comment ça marche</a>
+    <a href="#profils">Profils</a>
+    <a href="#inscription">S'inscrire</a>
+  </div>
+  <hr class="footer-divider"/>
+  <p class="footer-copy">© 2026 Rencontre Célibataires — Tous droits réservés</p>
+  <p class="footer-credit">Site conçu &amp; développé par <strong>DAZIZ DESIGN</strong></p>
+</footer>
+
+<!-- MODAL CONTACT -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-avatar-wrap" id="modalAvatarWrap"></div>
+    <div class="modal-name" id="modalName">—</div>
+    <div class="modal-info" id="modalInfo">—</div>
+    <div class="modal-phone" id="modalPhone">—</div>
+    <div class="modal-actions">
+      <a class="modal-btn btn-call" id="btnCall" href="#">📞 Appeler</a>
+      <a class="modal-btn btn-whatsapp" id="btnWhatsApp" href="#" target="_blank">💬 Envoyer un WhatsApp</a>
+      <a class="modal-btn btn-sms" id="btnSms" href="#">✉️ Envoyer un SMS</a>
+    </div>
+    <button class="modal-close" onclick="closeModal()">✕ Fermer</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  // ---- CONFIG FIREBASE ----
+  const firebaseConfig = {
+    apiKey: "AIzaSyDffNy9bskBn_AFoC0UbVaX2G69aDh1EqA",
+    authDomain: "rencontre-celibat-5c2db.firebaseapp.com",
+    projectId: "rencontre-celibat-5c2db",
+    storageBucket: "rencontre-celibat-5c2db.firebasestorage.app",
+    messagingSenderId: "259068804200",
+    appId: "1:259068804200:web:794a006b96b89040ed8fdd",
+    measurementId: "G-XF2HS7ZGR7"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // ---- VARIABLES GLOBALES ----
+  let selectedPhotoData = null;
+  let allProfiles = [];
+
+  // ---- CHARGER LES PROFILS ----
+  async function chargerProfils() {
+    try {
+      const q = query(collection(db, "profils"), orderBy("date", "desc"));
+      const snapshot = await getDocs(q);
+      allProfiles = [];
+      snapshot.forEach(doc => {
+        allProfiles.push({ id: doc.id, ...doc.data() });
+      });
+      afficherProfils(allProfiles);
+      document.getElementById('statCount').textContent = allProfiles.length + '+';
+    } catch (e) {
+      document.getElementById('profilesGrid').innerHTML = '<p class="no-profiles">Impossible de charger les profils. Vérifiez votre connexion.</p>';
+    }
+  }
+
+  // ---- AFFICHER LES PROFILS ----
+  function afficherProfils(list) {
+    const grid = document.getElementById('profilesGrid');
+    if (list.length === 0) {
+      grid.innerHTML = '<p class="no-profiles">Aucun profil pour l\'instant. Soyez le premier à vous inscrire ! 😊</p>';
+      return;
+    }
+    grid.innerHTML = '<div class="profiles-grid">' + list.map((p, i) => `
+      <div class="profile-card">
+        <div class="profile-top">
+          ${p.photo ? `<img src="${p.photo}" alt="${p.prenom}"/>` : `<span>${p.emoji || '👤'}</span>`}
+          <div class="profile-online"></div>
+        </div>
+        <div class="profile-body">
+          <div class="profile-name">${p.prenom} <span class="verified">✦</span></div>
+          <div class="profile-meta">📍 ${p.ville} &nbsp;·&nbsp; ${p.age} ans</div>
+          <div class="profile-bio">${p.bio || 'Nouveau membre de la communauté.'}</div>
+          <div class="profile-chips">${(p.tags||[]).map(t=>`<span class="chip">${t}</span>`).join('')}</div>
+          <button class="profile-contact-btn" onclick="ouvrirContact(${i})">📞 Contacter</button>
+        </div>
+      </div>`).join('') + '</div>';
+  }
+
+  // ---- COMPRESSION PHOTO ----
+  function compresserPhoto(dataUrl, maxWidth, qualite) {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        let w = img.width, h = img.height;
+        if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', qualite));
+      };
+      img.src = dataUrl;
+    });
+  }
+
+  // ---- APERÇU PHOTO ----
+  window.previewPhoto = function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 15 * 1024 * 1024) {
+      alert('⚠️ La photo ne doit pas dépasser 15 Mo.');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = async function(ev) {
+      // Compression automatique : max 700px, qualité 65% → environ 80-150 Ko
+      selectedPhotoData = await compresserPhoto(ev.target.result, 700, 0.65);
+      document.getElementById('photoPreview').src = selectedPhotoData;
+      document.getElementById('photoPreview').style.display = 'block';
+      document.getElementById('photoPlaceholder').style.display = 'none';
+      document.getElementById('photoHint').style.display = 'block';
+      document.getElementById('photoTitle').textContent = '✅ ' + file.name;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // ---- MODAL CONTACT ----
+  window.ouvrirContact = function(index) {
+    const p = allProfiles[index];
+    const telClean = (p.telephone || '').replace(/\s/g, '');
+    const wrap = document.getElementById('modalAvatarWrap');
+    wrap.innerHTML = p.photo ? `<img src="${p.photo}" alt="${p.prenom}"/>` : (p.emoji || '👤');
+    document.getElementById('modalName').textContent = p.prenom;
+    document.getElementById('modalInfo').textContent = `📍 ${p.ville} · ${p.age} ans`;
+    document.getElementById('modalPhone').textContent = p.telephone || 'Non renseigné';
+    document.getElementById('btnCall').href = `tel:${telClean}`;
+    document.getElementById('btnWhatsApp').href = `https://wa.me/${telClean.replace('+','')}`;
+    document.getElementById('btnSms').href = `sms:${telClean}`;
+    document.getElementById('modalOverlay').classList.add('active');
+  };
+
+  window.closeModal = function(e) {
+    if (!e || e.target === document.getElementById('modalOverlay')) {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+  };
+
+  // ---- INSCRIPTION ----
+  window.inscrire = async function() {
+    const prenom    = document.getElementById('prenom').value.trim();
+    const age       = document.getElementById('age').value.trim();
+    const genre     = document.getElementById('genre').value;
+    const ville     = document.getElementById('ville').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const telephone = document.getElementById('telephone').value.trim();
+    const interets  = document.getElementById('interets').value.trim();
+    const bio       = document.getElementById('description').value.trim();
+
+    if (!prenom || !age || !genre || !ville || !email || !telephone) {
+      afficherToast('⚠️ Veuillez remplir tous les champs obligatoires (*)', 'error'); return;
+    }
+    if (!selectedPhotoData) {
+      afficherToast('📸 Veuillez ajouter une photo de profil.', 'error'); return;
+    }
+    if (parseInt(age) < 18) {
+      afficherToast('⚠️ Vous devez avoir au moins 18 ans.', 'error'); return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Enregistrement...';
+
+    const emoji = genre === 'Femme' ? '👩🏾' : genre === 'Homme' ? '👨🏾' : '🧑🏾';
+    const tags  = interets ? interets.split(',').slice(0,3).map(t=>t.trim()).filter(Boolean) : [];
+
+    try {
+      await addDoc(collection(db, "profils"), {
+        prenom, age: parseInt(age), genre, ville, email, telephone, bio, tags, emoji,
+        photo: selectedPhotoData,
+        date: new Date().toISOString()
+      });
+
+      // Reset
+      ['prenom','age','email','ville','telephone','interets','description'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('genre').value = '';
+      document.getElementById('photoInput').value = '';
+      document.getElementById('photoPreview').style.display = 'none';
+      document.getElementById('photoPlaceholder').style.display = 'flex';
+      document.getElementById('photoHint').style.display = 'none';
+      document.getElementById('photoTitle').textContent = 'Appuyez ici pour choisir une photo';
+      selectedPhotoData = null;
+
+      afficherToast('✅ Votre profil a été enregistré avec succès ! ❤️', 'success');
+      await chargerProfils();
+      document.getElementById('profils').scrollIntoView({ behavior: 'smooth' });
+
+    } catch(e) {
+      console.error('Erreur Firestore:', e);
+      afficherToast('❌ Erreur : ' + (e.message || 'Réessayez.'), 'error');
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Créer mon profil gratuitement';
+  };
+
+  // ---- TOAST ----
+  function afficherToast(msg, type) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = `toast ${type}`;
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 4500);
+  }
+
+  // ---- DÉMARRAGE ----
+  chargerProfils();
+</script>
+</body>
+</html>
